@@ -1,0 +1,36 @@
+#!/bin/bash
+
+DATABASE_FILE=/home/rj5/.bash_aliass
+
+case $1 in
+
+  -delete)
+    echo "" > "$DATABASE_FILE" 
+    ;;
+
+  -s)
+      if [[ $(grep -c "$2" "$DATABASE_FILE") == 0 ]]; then
+      echo "alias $2=\"$3\"" >> "$DATABASE_FILE"
+      source ~/.bashrc
+	else
+      cat /home/rj5/.ascii1.txt
+      fi
+    ;;
+
+  -g)
+    grep "^$2" "$DATABASE_FILE" | sed -e "s/^$2//" | tail -n 1
+    ;;
+
+  -gg)
+    grep "^$2" "$DATABASE_FILE" | sed -e "s/^$2//" 
+    ;;
+
+  -all)
+    cat "$DATABASE_FILE"
+    ;;
+
+  -r) 
+    sed -i "/\b\($2\)\b/d" "$DATABASE_FILE"
+    ;;
+esac
+
